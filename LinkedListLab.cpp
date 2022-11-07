@@ -32,12 +32,12 @@ int length(List* l){
 
 //Get the Nth item from the list
 string get(List* l, int index){
-    while( l != NULL && index > 1 ){
+    while( l != NULL && index > 0 ){
             index--;
             l = l->next;
     }
     if ( l == NULL ){
-        return NULL;
+        return "";
     } else {
         return l->value;
     }
@@ -183,6 +183,19 @@ TEST_CASE("Deletion Tests") {
         deleteAt(theList, 4);
         REQUIRE( testPrint(theList) == "ABCD" );
     }
+}
+
+TEST_CASE("Get Tests") {
+    List* theList = NULL;
+    insertAt(theList, 100, "A");
+    insertAt(theList, 100, "B");
+    insertAt(theList, 100, "C");
+
+    REQUIRE( get(theList, 0) == "A" );
+    REQUIRE( get(theList, 1) == "B" );
+    REQUIRE( get(theList, 2) == "C" );
+    REQUIRE( get(theList, 3) == "" );
+
 }
 
 TEST_CASE("Contains Tests") {
