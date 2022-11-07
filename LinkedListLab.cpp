@@ -22,66 +22,45 @@ void print( List* l ){
 
 //Returns the number of items in the list
 int length(List* l){
-    int length = 0;
-    while ( l != NULL ){
-        l = l->next;
-        length++;
-    }
-    return length;
+    if ( l == NULL )
+        return 0;
+    return 1 + length(l->next);
 }
 
 //Get the Nth item from the list
 string get(List* l, int index){
-    while( l != NULL && index > 0 ){
-            index--;
-            l = l->next;
-    }
-    if ( l == NULL ){
+    if ( l == NULL )
         return "";
-    } else {
+    if ( index == 0 )
         return l->value;
-    }
+    return get(l->next, index-1);
 }
 
 //Returns true if the list contains needle
 bool contains(List* l, string needle){
-    while ( l != NULL ){
-        if ( l->value == needle ){
-            return true;
-        }
-        l = l->next;
-    }
-    return false;
+    if ( l == NULL )
+        return false;
+    if ( l->value == needle )
+        return true;
+    return contains( l->next, needle );
 }
 
 //Add an item to the list
 void insertAt(List* &list, int pos, string value){
-    if ( list == NULL || pos == 0 ){
+    if ( list == NULL || pos == 0 )
         list = new List{value, list};
-    } else {
-        List* l = list;
-        while( l->next != NULL && pos > 1 ){
-            pos--;
-            l = l->next;
-        }
-        l->next = new List{value, l->next};
-    }
+    else
+        insertAt( list->next, pos-1, value );
 }
 
 //Remove an item from the list
 void deleteAt(List* &list, int pos){
-    if ( list != NULL && pos == 0 ){
+    if ( list == NULL )
+        return; //Nothing to do
+    else if ( pos == 0 )
         list = list->next;
-    } else {
-        List *l = list;
-        while( l != NULL && pos > 1 ){
-            pos--;
-            l = l->next;
-        }
-        if ( l != NULL && l->next != NULL ){
-            l->next = l->next->next;
-        }
-    }
+    else
+        deleteAt( list->next, pos-1 );
 }
 
 /////////////////////////////////////////////////////
