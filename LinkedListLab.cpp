@@ -208,3 +208,14 @@ TEST_CASE("Contains Tests") {
         REQUIRE( !contains(theList, "D") );
     }
 }
+
+TEST_CASE("Length Tests") {
+    List* theList = NULL;
+    REQUIRE( length(theList) == 0 );
+    insertAt(theList, 0, "A");
+    REQUIRE( length(theList) == 1 );
+    insertAt(theList, 0, "B");
+    REQUIRE( length(theList) == 2 );
+    insertAt(theList, 0, "C");
+    REQUIRE( length(theList) == 3 );
+}
