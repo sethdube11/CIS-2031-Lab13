@@ -22,7 +22,7 @@ void print( List* l, std::ostream &out){
 
 //Returns the number of items in the list
 int length(List* l){
-    if(1==NULL){
+    if(l==NULL){
         return 0;
     }else{
         return 1 + length(l->next);
