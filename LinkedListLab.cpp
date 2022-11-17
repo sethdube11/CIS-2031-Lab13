@@ -10,7 +10,7 @@ struct List {
     List* next;
 };
 
-//Prints the list to cout
+//Prints the list to the provided output stream
 void print( List* l, std::ostream &out){
     while ( l != NULL ){
         //As long as l is not null....
