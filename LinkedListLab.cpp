@@ -1,9 +1,8 @@
 #include <iostream>
 #include <string>
+#include <sstream> 
 #include "catch_amalgamated.hpp"
-using std::cout;
 using std::string;
-using std::endl;
 
 
 struct List {
@@ -12,10 +11,10 @@ struct List {
 };
 
 //Prints the list to cout
-void print( List* l ){
+void print( List* l, std::ostream &out){
     while ( l != NULL ){
         //As long as l is not null....
-        cout << l->value << endl; //Print out it's value
+        out << l->value; //Print out it's value
         l = l->next; //Move on to the next value
     }
 }
@@ -90,9 +89,9 @@ void deleteAt(List* &list, int pos){
 //  🛑 Don't change it! 🛑
 //
 string testPrint(List* l){
-    if ( l == NULL )
-        return "";
-    return l->value + testPrint(l->next);
+    std::stringstream ss;
+    print(l, ss);
+    return ss.str();
 }
 
 TEST_CASE("Testing an empty list") {
