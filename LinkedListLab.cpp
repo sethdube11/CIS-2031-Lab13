@@ -12,33 +12,31 @@ struct List {
 
 //Prints the list to the provided output stream
 void print( List* l, std::ostream &out){
-    while ( l != NULL ){
-        //As long as l is not null....
-        out << l->value; //Print out it's value
-        l = l->next; //Move on to the next value
+    if( l == NULL ){
+        //do nothing
+    }else{
+        out << l->value;
+        l = l->next;
     }
 }
 
 //Returns the number of items in the list
 int length(List* l){
-    int length = 0;
-    while ( l != NULL ){
-        l = l->next;
-        length++;
-    }
-    return length;
+    if(1==NULL){
+        return 0;
+    }else{
+        return 1 + length(l->next);
+}
 }
 
 //Get the Nth item from the list
 string get(List* l, int index){
-    while( l != NULL && index > 0 ){
-            index--;
-            l = l->next;
-    }
     if ( l == NULL ){
         return "";
-    } else {
+    } else if( index==0 ) {
         return l->value;
+    }else{
+        return get(l->next, index-1);
     }
 }
 
